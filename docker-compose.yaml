@@ -16,7 +16,7 @@ services:
       context: ./
       dockerfile: ./dockerfiles/Dockerfile.node
     ports:
-      - "80:8080"
+      - "8080"
     depends_on:
       - mongodb
     environment:
@@ -30,6 +30,8 @@ services:
     build: 
       context: ./
       dockerfile: ./dockerfiles/Dockerfile.react
+    environment:
+      - API=node-app
     ports:
       - "3000:3000"
     depends_on:

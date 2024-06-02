@@ -10,4 +10,3 @@ db.createUser({
   ],
 });
 
-db.createCollection('Blog_db');

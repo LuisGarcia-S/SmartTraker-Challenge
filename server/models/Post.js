@@ -25,7 +25,7 @@ const post_dto = new Schema({
         type: String,
         trim: true,
         lowercase: true,
-        required: 'Email address is required',
+        require: true,
         validate: [validateEmail, 'Please fill a valid email address'],
     },
     phone: {
