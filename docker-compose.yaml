@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:5.0.2
+    volumes:
+      - ./db/data:/data/db
+      - ./db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: R00t.!
+
+  node-app:
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/Dockerfile.node
+    ports:
+      - "80:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - ENV=prod
+      - PORT=8080
+      - DB_HOST=mongodb
+      - DB_NAME=SmartTracker
+      - DB_PORT=27017
+
+  react-app:
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/Dockerfile.react
+    ports:
+      - "3000:3000"
+    depends_on:
+      - node-app
+
+        #volumes:
+        #  ./db/data:
