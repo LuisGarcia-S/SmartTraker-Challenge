@@ -11,6 +11,7 @@ var validatePhone = function(phone) {
 };
 
 const Schema = mongoose.Schema;
+
 const post_dto = new Schema({
     title: {
         type: String,
@@ -47,4 +48,4 @@ const post_dto = new Schema({
     }
 });
 
-module.exports = mongoose.model('Post', post_dto);
+module.exports = mongoose.model('Blog_db', post_dto);
