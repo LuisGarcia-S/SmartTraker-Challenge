@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import '@coreui/coreui/dist/css/coreui.min.css'
+import { CCard, CCardBody, CCardImage, CCardText, CCardTitle } from '@coreui/react';
+import { CRow, CCol, CContainer } from '@coreui/react';
 
 const API_NAME = process.env.API || 'localhost';
 
@@ -36,25 +39,34 @@ const DataTable = () => {
     return <p>Error: {error.message}</p>;
   }
 
+const varsCard = {
+    '--cui-card-spacer-y': 0,
+    '--cui-card-spacer-x': 0,
+    "--cui-card-border-radius":0,
+    "--cui-card-cap-padding-x":0,
+    "display":"flex"
+}
+
+const varsCardsGroup = {
+    "--cui-card-group-margin": 0
+}
+
   return (
-    <table>
-      <thead>
-        <tr>
-          {data.length > 0 && Object.keys(data[0]).map(key => (
-            <th key={key}>{key}</th>
+      <CContainer fluid>
+        <CRow xs={{cols: 1, gutterX:0, gutterY:5}} md={{cols:2}} >
+          {data.map((item, index) => (
+              <CCol xs style={varsCardsGroup} key={index} >
+                  <CCard style={varsCard} >
+                    <CCardTitle> {item.title} </CCardTitle>
+                    <CCardImage orientation="left" src={"../../logo512.png"} style={{"width":"30%"}} />
+                    <CCardBody> 
+                        <CCardText>{item.phone} </CCardText>
+                    </CCardBody>
+                  </CCard>
+              </CCol>
           ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            {Object.values(item).map((value, idx) => (
-              <td key={idx}>{value}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        </CRow>
+      </CContainer>
   );
 };
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import "./CardPost.css";
+import '@coreui/coreui/dist/css/coreui.min.css'
+import { CCard, CFormInput, CButton } from '@coreui/react';
+import { CForm, CCardBody, CFormTextarea } from '@coreui/react';
 
 const API_NAME = process.env.API || 'localhost';
 const API_PORT = process.env.API_PORT || '8080';
@@ -57,66 +59,59 @@ const CardComponent = () => {
   };
 
   return (
-    <div className='cardPost'>
-      <form onSubmit={handleSubmit}>
-        <div className='formGroup'>
-          <label htmlFor="title">Title:</label>
-          <input
+    <CCard>
+      <CCardBody>
+      <CForm onSubmit={handleSubmit}>
+          <CFormInput
             type="text"
             id="title"
             name="title"
+            label="Title"
             value={formData.title}
             onChange={handleChange}
             required
           />
-        </div>
-        <div className='formGroup'>
-          <label htmlFor="author">Author:</label>
-          <input
+          <CFormInput
             type="text"
             id="author"
             name="author"
+            label="Author"
             value={formData.author}
             onChange={handleChange}
             required
           />
-        </div>
-        <div className='formGroup'>
-          <label htmlFor="email">Email:</label>
-          <input
+          <CFormInput
             type="email"
             id="email"
             name="email"
+            label="Email"
             value={formData.email}
             onChange={handleChange}
             required
           />
-        </div>
-        <div className='formGroup'>
-          <label htmlFor="body">Message:</label>
-          <textarea
-            id="body"
-            name="body"
-            value={formData.body}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className='formGroup'>
-          <label htmlFor="phone">Phone:</label>
-          <textarea
+          <CFormInput
             id="phone"
             name="phone"
+            label="Phone"
             value={formData.phone}
             onChange={handleChange}
             required
-          ></textarea>
-        </div>
+          />
+          <CFormTextarea
+            id="body"
+            name="body"
+            label="Post"
+            value={formData.body}
+            onChange={handleChange}
+          ></CFormTextarea>
+          
 
-        <button type="submit">Submit</button>
-      </form>
+        <CButton type="submit" >Submit</CButton>
+      </CForm>
       {response && <p>Response: {JSON.stringify(response)}</p>}
       {error && <p>Error: {error.message}</p>}
-    </div>
+      </CCardBody>
+    </CCard>
   );
 };
 

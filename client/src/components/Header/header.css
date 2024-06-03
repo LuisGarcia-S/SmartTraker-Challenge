@@ -4,17 +4,19 @@
     background-color: #2D2D2D;
     color: white;
     position: sticky;
+    z-index: 1;
     top: 0; 
     display: flex;
     align-items: center;
     font-family: "Rubik", sans-serif;
     font-size: 32px;
     font-weight: 50px;
+    
 }
 
-.topLeft,.topRigth{
-    flex: 3;
+.topLeft,.topCenter{
+    flex: 4;
 }
-.topCenter{
-    flex: 6;
+.topRigth{
+    flex: 2;
 }
