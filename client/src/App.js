@@ -1,13 +1,18 @@
-//import logo from './logo.svg';
 import './App.css';
 import TopBar from './components/Header/header';
-import Home from './pages/home/home';
+import DataTable from './components/DataTable/DataTable';
+import { Routes, Route } from 'react-router-dom';
+import Post from './components/post/post';
 
+ 
 function App() {
   return (
     <div className="App">
-      <TopBar/>
-      <Home/>
+        <TopBar/>
+        <Routes>
+            <Route path='/' element={<DataTable/>}/>
+            <Route path='Post/:id' element={<Post/>}/>
+        </Routes>
     </div>
   );
 }

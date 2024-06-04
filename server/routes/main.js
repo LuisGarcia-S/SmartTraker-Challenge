@@ -33,4 +33,18 @@ router.get('/read_all', async (_, res) => {
     } 
 });
 
+router.get('/read/:id', async (req, res) => {
+    const postId = req.params.id;
+    try {
+        const data = await Post.findById(postId);
+        if(data)
+            res.status(200).json(data);
+        else
+            res.status(404).json({message:"No hay post disponibles"});
+    } catch (error){
+        re
+        res.status(500).json({message: error.message});
+    } 
+});
+
 module.exports = router;

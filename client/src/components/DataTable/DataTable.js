@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import '@coreui/coreui/dist/css/coreui.min.css'
-import { CCard, CCardBody, CCardImage, CCardText, CCardTitle } from '@coreui/react';
-import { CRow, CCol, CContainer } from '@coreui/react';
+import { CRow, CCol, CContainer} from '@coreui/react';
+import { CCard, CCardBody, CCardImage, 
+    CCardText, CCardTitle, CButton } from '@coreui/react';
+import { Link } from 'react-router-dom';
 
 const API_NAME = process.env.API || 'localhost';
+const API_PORT = process.env.API || '8080';
 
 const DataTable = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Replace with your endpoint URL
-    const endpoint = `http://${API_NAME}:8080/read_all`;
+    const endpoint = `http://${API_NAME}:${API_PORT}/read_all`;
 
     fetch(endpoint)
       .then(response => {
@@ -23,21 +24,8 @@ const DataTable = () => {
       })
       .then(data => {
         setData(data);
-        setLoading(false);
       })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
   }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
 
 const varsCard = {
     '--cui-card-spacer-y': 0,
@@ -47,26 +35,45 @@ const varsCard = {
     "display":"flex"
 }
 
-const varsCardsGroup = {
-    "--cui-card-group-margin": 0
-}
+const varsCardsGroup = { "--cui-card-group-margin": 0 }
 
   return (
-      <CContainer fluid>
-        <CRow xs={{cols: 1, gutterX:0, gutterY:5}} md={{cols:2}} >
-          {data.map((item, index) => (
-              <CCol xs style={varsCardsGroup} key={index} >
-                  <CCard style={varsCard} >
+    <CContainer 
+      fluid
+      style={{ "paddingTop":"35px" }}>
+      <CRow xs={{
+        cols: 1, 
+        gutterX:0, 
+        gutterY:5
+        }} md={{cols:2}} >
+
+        {data.map((item, index) => (
+          <CCol 
+            xs 
+            style={varsCardsGroup} 
+            key={index} >
+              <CCard style={varsCard} >
+                <CRow>
+                  <CCol md={3}>
+                    <CCardImage src={"../../logo512.png"} />
+                  </CCol>
+                  <CCol md={6}>
+                    <CCardText> {item.author} </CCardText>
                     <CCardTitle> {item.title} </CCardTitle>
-                    <CCardImage orientation="left" src={"../../logo512.png"} style={{"width":"30%"}} />
                     <CCardBody> 
-                        <CCardText>{item.phone} </CCardText>
+                      <CCardText> {item.body.substring(0, 50)} </CCardText>
+                      <Link to={{ pathname:`/Post/${item._id}`,
+                                state:item }}> 
+                        <CButton>{'>>'} </CButton>
+                      </Link>
                     </CCardBody>
-                  </CCard>
-              </CCol>
-          ))}
-        </CRow>
-      </CContainer>
+                  </CCol>
+                </CRow>
+              </CCard>
+          </CCol>
+        ))}
+      </CRow>
+    </CContainer>
   );
 };
 

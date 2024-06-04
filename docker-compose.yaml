@@ -32,6 +32,7 @@ services:
       dockerfile: ./dockerfiles/Dockerfile.react
     environment:
       - API=node-app
+      - API_PORT=8080
     ports:
       - "3000:3000"
     depends_on:
