@@ -7,8 +7,22 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+const allowedOrigins = ['http://localhost:3000', 'http://react-app:3000'];
 
-app.use(cors());
+const corsOptions = {
+  origin: (origin, callback) => {
+    console.log(`Request atempt at: ${Date.now()} by ${origin}`);
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS ${origin}`));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 //Conect to DB
 connectDB();

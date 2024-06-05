@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '@coreui/coreui/dist/css/coreui.min.css'
 import { CCard, CFormInput, CButton } from '@coreui/react';
-import { CForm, CCardBody, CFormTextarea } from '@coreui/react';
+import { CForm, CCardBody, CFormTextarea, CCardTitle } from '@coreui/react';
 
 const API_NAME = process.env.API || 'localhost';
 const API_PORT = process.env.API_PORT || '8080';
@@ -61,7 +61,10 @@ const CardComponent = () => {
   return (
     <CCard>
       <CCardBody>
-      <CForm onSubmit={handleSubmit}>
+      <CCardTitle style={{"color":"rgba(241,161,10,1)"}}> Post </CCardTitle>
+      <CForm onSubmit={handleSubmit} style={{
+          "marginTop":"15px",
+          "textAlign":"left"}}>
           <CFormInput
             type="text"
             id="title"
@@ -105,10 +108,9 @@ const CardComponent = () => {
             onChange={handleChange}
           ></CFormTextarea>
           
-
-        <CButton type="submit" >Submit</CButton>
+        <CButton color="dark" type="submit" style={{"marginTop":"15px", "marginLeft":"42%"}}>Submit</CButton>
       </CForm>
-      {response && <p>Response: {JSON.stringify(response)}</p>}
+      {response && <p>Entry post created!</p>}
       {error && <p>Error: {error.message}</p>}
       </CCardBody>
     </CCard>

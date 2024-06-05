@@ -3,7 +3,6 @@ import TopBar from './components/Header/header';
 import DataTable from './components/DataTable/DataTable';
 import { Routes, Route } from 'react-router-dom';
 import Post from './components/post/post';
-
  
 function App() {
   return (

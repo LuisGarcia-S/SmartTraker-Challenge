@@ -28,7 +28,6 @@ router.get('/read_all', async (_, res) => {
         else
             res.status(404).json({message:"No hay post disponibles"});
     } catch (error){
-        re
         res.status(500).json({message: error.message});
     } 
 });
@@ -42,7 +41,6 @@ router.get('/read/:id', async (req, res) => {
         else
             res.status(404).json({message:"No hay post disponibles"});
     } catch (error){
-        re
         res.status(500).json({message: error.message});
     } 
 });

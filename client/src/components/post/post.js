@@ -36,18 +36,21 @@ const Post = () => {
     <CContainer 
       fluid 
       style={{
-          "width":"90%", 
+          "width":"75%", 
           "paddingTop":"35px"
       }}>
       <CCard className='mb-3' >
-        <CRow>
-         <CCol md={3}>
+        <CRow style={{ display: 'flex', alignItems: 'center' }}>
+         <CCol md={5}>
          <CCardImage src={"../../logo512.png"} />
          </CCol>
-         <CCol md={6} >
+         <CCol md={5} style={{ 
+             display: 'flex', 
+             flexDirection: 'column', 
+             alignItems: 'center' }}>
          {formattedDate}
          <CCardText> {data.author}</CCardText>
-         <CCardTitle> {data.title} </CCardTitle>
+         <CCardTitle style={{"color":"rgba(241,161,10,1)"}}> {data.title} </CCardTitle>
          </CCol>
         </CRow>
         <CCardBody style={{

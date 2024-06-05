@@ -10,13 +10,15 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: R00t.!
+    networks:
+      - SmartTracker-net
 
   node-app:
     build: 
       context: ./
       dockerfile: ./dockerfiles/Dockerfile.node
     ports:
-      - "8080"
+      - "8080:8080"
     depends_on:
       - mongodb
     environment:
@@ -25,18 +27,24 @@ services:
       - DB_HOST=mongodb
       - DB_NAME=SmartTracker
       - DB_PORT=27017
+    networks:
+      - SmartTracker-net
 
   react-app:
     build: 
       context: ./
       dockerfile: ./dockerfiles/Dockerfile.react
     environment:
+      - ENV=prod
       - API=node-app
       - API_PORT=8080
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - node-app
+    networks:
+      - SmartTracker-net
 
-        #volumes:
-        #  ./db/data:
+networks:
+  SmartTracker-net:
+    driver: bridge

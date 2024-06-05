@@ -14,7 +14,7 @@ const TopBar = () => {
                 <Link to="/" style={{
                     "textDecoration":"none",
                     "color":"white"
-                }}> Rockr Bloq </Link>
+                }}> Rockr Blog </Link>
             </div>
             <div className="topCenter">
                 <>

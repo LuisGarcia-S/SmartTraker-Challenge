@@ -6,7 +6,7 @@ import { CCard, CCardBody, CCardImage,
 import { Link } from 'react-router-dom';
 
 const API_NAME = process.env.API || 'localhost';
-const API_PORT = process.env.API || '8080';
+const API_PORT = process.env.API_PORT || '8080';
 
 const DataTable = () => {
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ const DataTable = () => {
     fetch(endpoint)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(response);
         }
         return response.json();
       })
